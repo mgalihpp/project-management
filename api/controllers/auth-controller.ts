@@ -42,7 +42,13 @@ class AuthController {
         token,
         'Login Successfully'
       );
-    } catch (error) {}
+    } catch (error) {
+      if (error instanceof Error) {
+        return httpError.internalServerError(res, error.message);
+      } else {
+        return httpError.internalServerError(res);
+      }
+    }
   }
 
   async register(req: Request, res: Response) {
