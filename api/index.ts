@@ -8,6 +8,9 @@ import dotenv from 'dotenv';
 /* ROUTE IMPORT */
 import userRoutes from './routers/user-router';
 import projectRoutes from './routers/project-router';
+import teamRoutes from './routers/team-router';
+import searchRoutes from './routers/search-router';
+import taskRoutes from './routers/task-router';
 
 /* CONFIGURATIONS */
 dotenv.config();
@@ -31,13 +34,15 @@ app.use(
 app.use(cors());
 
 /* ROUTES */
-
 app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
 app.use('/user', userRoutes);
 app.use('/project', projectRoutes);
+app.use('/team', teamRoutes);
+app.use('/search', searchRoutes);
+app.use('/task', taskRoutes);
 
 /* START SERVER */
 app.listen(port, () => {

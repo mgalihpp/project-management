@@ -9,8 +9,8 @@
             "name": "api"
         },
         {
-            "path": "./apps",
-            "name": "apps"
+            "path": "./app",
+            "name": "app"
         }
     ]
 }

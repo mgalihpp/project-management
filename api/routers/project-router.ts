@@ -1,14 +1,14 @@
 import { Router } from 'express';
-import ProjectController from '../controllers/project-controller';
-import ProjectValidator from '../validators/project';
+import projectController from '../controllers/project-controller';
+import projectValidator from '../validators/project';
 
 const router = Router();
 
-router.get('/', ProjectController.getAllProjects);
+router.get('/', projectController.getAllProjects);
 router.post(
   '/',
-  ProjectValidator.createProject,
-  ProjectController.createProject
+  projectValidator.createProject,
+  projectController.createProject
 );
 
 export default router;

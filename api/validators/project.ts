@@ -19,6 +19,8 @@ class ProjectValidator {
       const errors = result.error.errors;
       return httpError.validationError(res, errors);
     }
+
+    next();
   }
 }
 

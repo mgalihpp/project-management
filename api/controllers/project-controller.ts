@@ -8,12 +8,12 @@ class ProjectController {
   async getAllProjects(req: Request, res: Response) {
     try {
       const projects = await db.project.findMany();
-      httpResponse.success(res, HttpStatus.OK, projects);
+      return httpResponse.success(res, HttpStatus.OK, projects);
     } catch (error) {
       if (error instanceof Error) {
-        httpError.internalServerError(res, error.message);
+        return httpError.internalServerError(res, error.message);
       } else {
-        httpError.internalServerError(res);
+        return httpError.internalServerError(res);
       }
     }
   }
@@ -31,7 +31,7 @@ class ProjectController {
         },
       });
 
-      httpResponse.success(
+      return httpResponse.success(
         res,
         HttpStatus.CREATED,
         null,
@@ -39,9 +39,9 @@ class ProjectController {
       );
     } catch (error) {
       if (error instanceof Error) {
-        httpError.internalServerError(res, error.message);
+        return httpError.internalServerError(res, error.message);
       } else {
-        httpError.internalServerError(res);
+        return httpError.internalServerError(res);
       }
     }
   }
