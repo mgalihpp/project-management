@@ -34,6 +34,13 @@ class HttpError {
     return this.sendError(res, HttpStatus.BAD_REQUEST, message);
   }
 
+  static unauthorized(
+    res: Response,
+    message: string | string[] = 'Unauthorized'
+  ) {
+    return this.sendError(res, HttpStatus.UNAUTHORIZED, message);
+  }
+
   // You can add more error types (e.g., unauthorized, forbidden, etc.) if needed
 }
 

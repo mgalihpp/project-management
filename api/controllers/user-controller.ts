@@ -6,6 +6,20 @@ import httpError from '../helpers/httpError';
 import HttpStatus from 'http-status-codes';
 
 class UserController {
+  async getUser(req: Request, res: Response) {
+    try {
+      delete (req.user as any)?.password;
+
+      return httpResponse.success(res, HttpStatus.OK, req.user);
+    } catch (error) {
+      if (error instanceof Error) {
+        return httpError.internalServerError(res, error.message);
+      } else {
+        return httpError.internalServerError(res);
+      }
+    }
+  }
+
   async getAllUsers(req: Request, res: Response) {
     try {
       const users = await db.user.findMany();
@@ -23,7 +37,7 @@ class UserController {
     try {
       const user = await db.user.findFirst({
         where: {
-          cognitoId: req.params.cognitoId,
+          userId: parseInt(req.params.userId),
         },
       });
 
@@ -41,24 +55,24 @@ class UserController {
     }
   }
 
-  async createUser(req: Request, res: Response) {
+  async updateUser(req: Request, res: Response) {
     try {
-      const { username, cognitoId, profilePictureUrl, teamId } = req.body;
+      const { teamId } = req.body;
 
-      await db.user.create({
+      await db.user.update({
+        where: {
+          userId: req.user?.userId,
+        },
         data: {
-          username,
-          cognitoId,
-          profilePictureUrl,
           teamId,
         },
       });
 
       return httpResponse.success(
         res,
-        HttpStatus.CREATED,
+        HttpStatus.OK,
         null,
-        'Successfully created user'
+        'Successfully Updated User'
       );
     } catch (error) {
       if (error instanceof Error) {

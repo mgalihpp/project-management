@@ -5,7 +5,7 @@ import httpError from '../helpers/httpError';
 // Define a Zod schema
 export const userSchema = z.object({
   username: z.string().min(1, 'Username is required'),
-  cognitoId: z.string().min(1, 'Cognito Id is required'),
+  userId: z.string().min(1, 'UserId is required'),
   profilePictureUrl: z.string().url('Must be a valid URL'),
   teamId: z.string().optional(),
 });
@@ -24,7 +24,7 @@ class UserValidator {
 
   findUser(req: Request, res: Response, next: NextFunction) {
     const result = z
-      .object({ cognitoId: userSchema.shape.cognitoId })
+      .object({ userId: userSchema.shape.userId })
       .safeParse(req.params);
     if (!result.success) {
       const errors = result.error.errors;
