@@ -14,7 +14,15 @@ class TaskController {
           projectId: parseInt(projectId as string),
         },
         include: {
-          author: true,
+          author: {
+            select: {
+              profilePictureUrl: true,
+              username: true,
+              teamId: true,
+              userId: true,
+              password: false,
+            },
+          },
           assignee: true,
           comments: true,
           attachments: true,
