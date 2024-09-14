@@ -8,11 +8,13 @@ class HttpError {
     statusCode: number,
     message: string | string[] | ZodIssue[]
   ) {
-    return res.status(statusCode).json({
-      status: statusCode,
-      success: false,
-      message: message,
-    });
+    if (!res.headersSent) {
+      return res.status(statusCode).json({
+        status: statusCode,
+        success: false,
+        message: message,
+      });
+    }
   }
 
   static internalServerError(
