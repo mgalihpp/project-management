@@ -1,0 +1,122 @@
+[
+  {
+    "username": "AliceJones",
+    "teamId": 1,
+    "profilePictureUrl": "p1.jpeg",
+    "password": "123456"
+  },
+  {
+    "username": "BobSmith",
+    "teamId": 2,
+    "profilePictureUrl": "p2.jpeg",
+    "password": "123456"
+  },
+  {
+    "username": "CarolWhite",
+    "teamId": 3,
+    "profilePictureUrl": "p3.jpeg",
+    "password": "123456"
+  },
+  {
+    "username": "DaveBrown",
+    "teamId": 4,
+    "profilePictureUrl": "p4.jpeg",
+    "password": "123456"
+  },
+  {
+    "username": "EveClark",
+    "teamId": 5,
+    "profilePictureUrl": "p5.jpeg",
+    "password": "123456"
+  },
+  {
+    "username": "FrankWright",
+    "teamId": 1,
+    "profilePictureUrl": "p6.jpeg",
+    "password": "123456"
+  },
+  {
+    "username": "GraceHall",
+    "teamId": 2,
+    "profilePictureUrl": "p7.jpeg",
+    "password": "123456"
+  },
+  {
+    "username": "HenryAllen",
+    "teamId": 3,
+    "profilePictureUrl": "p8.jpeg",
+    "password": "123456"
+  },
+  {
+    "username": "IdaMartin",
+    "teamId": 4,
+    "profilePictureUrl": "p9.jpeg",
+    "password": "123456"
+  },
+  {
+    "username": "JohnDoe",
+    "teamId": 5,
+    "profilePictureUrl": "p10.jpeg",
+    "password": "123456"
+  },
+  {
+    "username": "LauraAdams",
+    "teamId": 1,
+    "profilePictureUrl": "p11.jpeg",
+    "password": "123456"
+  },
+  {
+    "username": "NormanBates",
+    "teamId": 2,
+    "profilePictureUrl": "p12.jpeg",
+    "password": "123456"
+  },
+  {
+    "username": "OliviaPace",
+    "teamId": 3,
+    "profilePictureUrl": "p13.jpeg",
+    "password": "123456"
+  },
+  {
+    "username": "PeterQuill",
+    "teamId": 4,
+    "profilePictureUrl": "p1.jpeg",
+    "password": "123456"
+  },
+  {
+    "username": "QuincyAdams",
+    "teamId": 5,
+    "profilePictureUrl": "p2.jpeg",
+    "password": "123456"
+  },
+  {
+    "username": "RachelGreen",
+    "teamId": 1,
+    "profilePictureUrl": "p3.jpeg",
+    "password": "123456"
+  },
+  {
+    "username": "SteveJobs",
+    "teamId": 2,
+    "profilePictureUrl": "p4.jpeg",
+    "password": "123456"
+  },
+  {
+    "username": "TinaFey",
+    "teamId": 3,
+    "profilePictureUrl": "p5.jpeg",
+    "password": "123456"
+  },
+  {
+    "username": "UrsulaMonroe",
+    "teamId": 4,
+    "profilePictureUrl": "p6.jpeg",
+    "password": "123456"
+  },
+  {
+    "username": "VictorHugo",
+    "teamId": 5,
+    "profilePictureUrl": "p7.jpeg",
+    "password": "123456"
+  }
+]
