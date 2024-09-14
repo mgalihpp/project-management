@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "install": "npm run install -w api && npm run install -w app",
     "start:api": "npm run dev -w api",
     "start:app": "npm run dev -w app",
     "start": "concurrently \"npm run start:api\" \"npm run start:app\""
