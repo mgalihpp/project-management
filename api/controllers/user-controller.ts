@@ -22,7 +22,14 @@ class UserController {
 
   async getAllUsers(req: Request, res: Response) {
     try {
-      const users = await db.user.findMany();
+      const users = await db.user.findMany({
+        select: {
+          password: false,
+          profilePictureUrl: true,
+          userId: true,
+          username: true,
+        },
+      });
       return httpResponse.success(res, HttpStatus.OK, users);
     } catch (error) {
       if (error instanceof Error) {

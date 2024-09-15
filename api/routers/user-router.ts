@@ -6,7 +6,7 @@ import { authenticated } from '../middleware/auth';
 const router = Router();
 
 router.get('/', authenticated, userController.getUser);
-// router.get('/', userController.getAllUsers);
+router.get('/all', userController.getAllUsers);
 router.get('/:userId', userValidator.findUser, userController.getUserById);
 router.put('/', userValidator.createUser, userController.updateUser);
 

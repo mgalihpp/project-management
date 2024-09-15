@@ -60,7 +60,7 @@ class TaskValidator {
   getUserTasks(req: Request, res: Response, next: NextFunction) {
     const result = z
       .object({
-        userId: z.number(),
+        userId: z.string(),
       })
       .safeParse(req.params);
     if (!result.success) {

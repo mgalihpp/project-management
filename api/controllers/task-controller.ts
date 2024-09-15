@@ -23,7 +23,15 @@ class TaskController {
               password: false,
             },
           },
-          assignee: true,
+          assignee: {
+            select: {
+              profilePictureUrl: true,
+              username: true,
+              teamId: true,
+              userId: true,
+              password: false,
+            },
+          },
           comments: true,
           attachments: true,
         },
