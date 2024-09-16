@@ -69,6 +69,7 @@ class TaskController {
 
       await db.task.create({
         data: {
+          id: Math.floor(Math.random() * 100000),
           title,
           description,
           status,
