@@ -1,24 +1,33 @@
+// @ts-nocheck
 import { useAppDispatch, useAppSelector } from "@/store";
 import { setIsDarkMode, setIsSidebarCollapsed } from "@/store";
+import { api } from "@/store/api";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import {
   Avatar,
   Button,
   Dropdown,
   Flex,
-  Input,
   MenuProps,
+  Select,
   Typography,
 } from "antd";
 import { Sun, Moon, Settings, User, LogOut } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export default function Navbar() {
+  const navigate = useNavigate();
   const isSidebarCollapsed = useAppSelector(
     (state) => state.global.isSidebarCollapsed,
   );
   const isDarkMode = useAppSelector((state) => state.global.isDarkMode);
   const session = useAppSelector((state) => state.global.session);
   const dispatch = useAppDispatch();
+
+  const { data: usersData } = api.useGetUsersQuery();
+  const { data: projectsData } = api.useGetProjectsQuery();
+  const { data: tasksData } = api.useGetTasksQuery({ projectId: 1 });
+  const { data: teamsData } = api.useGetTeamsQuery();
 
   const items: MenuProps["items"] = [
     {
@@ -71,6 +80,46 @@ export default function Navbar() {
     },
   ];
 
+  const handleSearchChange = (
+    value: string,
+    option:
+      | {
+          label: JSX.Element;
+          title: string;
+          options: never[];
+        }
+      | {
+          label: JSX.Element;
+          title: string;
+          options: never[];
+        }[],
+  ) => {
+    const id = value.split("-")[1];
+
+    switch (
+      (option as { label: JSX.Element; data: string; options: never[] }).data
+    ) {
+      case "task": {
+        navigate(`/tasks/${id}`);
+        break;
+      }
+      case "project": {
+        navigate(`/projects/${id}`);
+        break;
+      }
+      case "user": {
+        navigate(`/users/${id}`);
+        break;
+      }
+      case "team": {
+        navigate(`/teams/${id}`);
+        break;
+      }
+      default:
+        break;
+    }
+  };
+
   return (
     <Flex className="items-center justify-between">
       {/* Search Bar */}
@@ -86,7 +135,50 @@ export default function Navbar() {
           }}
         />
         <Flex className="relative h-min w-[200px]">
-          <Input.Search className="w-full" />
+          <Select
+            className="w-full"
+            showSearch
+            placeholder="Search..."
+            options={[
+              {
+                label: <span>User</span>,
+                title: "user",
+                options: usersData?.data.map((user) => ({
+                  label: <span>{user.username}</span>,
+                  value: `user-${user.userId}`,
+                  data: "user",
+                })),
+              },
+              {
+                label: <span>Task</span>,
+                title: "task",
+                options: tasksData?.data.map((task) => ({
+                  label: <span>{task.title}</span>,
+                  value: `task-${task.id}`,
+                  data: "task",
+                })),
+              },
+              {
+                label: <span>Project</span>,
+                title: "project",
+                options: projectsData?.data.map((project) => ({
+                  label: <span>{project.name}</span>,
+                  value: `project-${project.id}`,
+                  data: "project",
+                })),
+              },
+              {
+                label: <span>Team</span>,
+                title: "team",
+                options: teamsData?.data.map((team) => ({
+                  label: <span>{team.teamName}</span>,
+                  value: team.id,
+                  data: "team",
+                })),
+              },
+            ]}
+            onChange={handleSearchChange}
+          />
         </Flex>
 
         {/* Icons For Mobile */}

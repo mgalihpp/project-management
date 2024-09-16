@@ -60,7 +60,7 @@ export default function Sidebar() {
     {
       key: "5",
       icon: <Users className="size-5" />,
-      label: <SidebarLink label="Teams" href="/team" />,
+      label: <SidebarLink label="Teams" href="/teams" />,
     },
     {
       key: "6",
@@ -72,19 +72,19 @@ export default function Sidebar() {
       children: [
         {
           key: `subpriority-1`,
-          icon: <AlertCircle className="size-5 fill-red-500" />,
+          icon: <AlertCircle className="size-5 dark:fill-red-500" />,
           label: (
             <SidebarLink label="Urgent" href="/priority/urgent" priority />
           ),
         },
         {
           key: `subpriority-2`,
-          icon: <ShieldAlert className="size-5 fill-yellow-500" />,
+          icon: <ShieldAlert className="size-5 dark:fill-yellow-500" />,
           label: <SidebarLink label="High" href="/priority/high" priority />,
         },
         {
           key: `subpriority-3`,
-          icon: <AlertTriangle className="size-5 fill-green-500" />,
+          icon: <AlertTriangle className="size-5 dark:fill-green-500" />,
           label: (
             <SidebarLink label="Medium" href="/priority/medium" priority />
           ),
@@ -228,6 +228,7 @@ interface SidebarLinkProps {
 }
 
 const SidebarLink = ({ href, label, priority }: SidebarLinkProps) => {
+  const isDarkMode = useAppSelector((state) => state.global.isDarkMode);
   return (
     <Link to={href} className="w-full">
       <div
@@ -235,11 +236,17 @@ const SidebarLink = ({ href, label, priority }: SidebarLinkProps) => {
       >
         {priority ? (
           label === "Urgent" ? (
-            <Typography.Text type="danger">{label}</Typography.Text>
+            <Typography.Text type={isDarkMode ? "danger" : undefined}>
+              {label}
+            </Typography.Text>
           ) : label === "High" ? (
-            <Typography.Text type="warning">{label}</Typography.Text>
+            <Typography.Text type={isDarkMode ? "warning" : undefined}>
+              {label}
+            </Typography.Text>
           ) : label === "Medium" ? (
-            <Typography.Text type="success">{label}</Typography.Text>
+            <Typography.Text type={isDarkMode ? "success" : undefined}>
+              {label}
+            </Typography.Text>
           ) : label === "Low" ? (
             <Typography.Text>{label}</Typography.Text>
           ) : (
