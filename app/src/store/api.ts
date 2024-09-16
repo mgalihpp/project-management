@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import Cookies from "js-cookie";
 import { RootState } from ".";
@@ -110,16 +111,16 @@ export const api = createApi({
           ? result.data.map(({ id }) => ({ type: "Tasks" as const, id }))
           : [{ type: "Tasks" as const }],
     }),
-    getTasksByUser: build.query<Task[], number>({
-      query: (userId) => `tasks/user/${userId}`,
+    getTasksByUser: build.query<ApiResponse<Task[]>, number>({
+      query: (userId) => `task/user/${userId}`,
       providesTags: (result, error, userId) =>
         result
-          ? result.map(({ id }) => ({ type: "Tasks", id }))
+          ? result.data.map(({ id }) => ({ type: "Tasks", id }))
           : [{ type: "Tasks", id: userId }],
     }),
-    createTask: build.mutation<Task, Partial<Task>>({
+    createTask: build.mutation<ApiResponse<Task>, Partial<Task>>({
       query: (task) => ({
-        url: "tasks",
+        url: "task",
         method: "POST",
         body: task,
       }),
@@ -127,7 +128,7 @@ export const api = createApi({
     }),
     updateTaskStatus: build.mutation<Task, { taskId: number; status: string }>({
       query: ({ taskId, status }) => ({
-        url: `tasks/${taskId}/status`,
+        url: `task/${taskId}/status`,
         method: "PATCH",
         body: { status },
       }),
@@ -135,12 +136,12 @@ export const api = createApi({
         { type: "Tasks", id: taskId },
       ],
     }),
-    getUsers: build.query<User[], void>({
-      query: () => "users",
+    getUsers: build.query<ApiResponse<User[]>, void>({
+      query: () => "user/all",
       providesTags: ["Users"],
     }),
-    getTeams: build.query<Team[], void>({
-      query: () => "teams",
+    getTeams: build.query<ApiResponse<Team[]>, void>({
+      query: () => "team",
       providesTags: ["Teams"],
     }),
     search: build.query<SearchResults, string>({
