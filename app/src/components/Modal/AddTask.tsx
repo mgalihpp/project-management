@@ -12,26 +12,12 @@ import {
 } from "antd";
 import React, { useState } from "react";
 import dayjs from "dayjs";
+import { PRIORITY, TASK_STATUS } from "@/constants";
 
 interface AddTaskModalProps {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
-
-const Status = {
-  ToDo: "To Do",
-  WorkInProgress: "Work In Progress",
-  UnderReview: "Under Review",
-  Completed: "Completed",
-};
-
-const Priority = {
-  Urgent: "Urgent",
-  High: "High",
-  Medium: "Medium",
-  Low: "Low",
-  Backlog: "Backlog",
-};
 
 type tagOptions = {
   label: string;
@@ -252,20 +238,20 @@ export default function AddTaskModal({ open, setOpen }: AddTaskModalProps) {
               }}
               options={[
                 {
-                  label: Status.ToDo,
-                  value: Status.ToDo,
+                  label: TASK_STATUS.ToDo,
+                  value: TASK_STATUS.ToDo,
                 },
                 {
-                  label: Status.WorkInProgress,
-                  value: Status.WorkInProgress,
+                  label: TASK_STATUS.WorkInProgress,
+                  value: TASK_STATUS.WorkInProgress,
                 },
                 {
-                  label: Status.UnderReview,
-                  value: Status.UnderReview,
+                  label: TASK_STATUS.UnderReview,
+                  value: TASK_STATUS.UnderReview,
                 },
                 {
-                  label: Status.Completed,
-                  value: Status.Completed,
+                  label: TASK_STATUS.Completed,
+                  value: TASK_STATUS.Completed,
                 },
               ]}
             />
@@ -283,24 +269,24 @@ export default function AddTaskModal({ open, setOpen }: AddTaskModalProps) {
               }}
               options={[
                 {
-                  label: Priority.Urgent,
-                  value: Priority.Urgent,
+                  label: PRIORITY.Urgent,
+                  value: PRIORITY.Urgent,
                 },
                 {
-                  label: Priority.High,
-                  value: Priority.High,
+                  label: PRIORITY.High,
+                  value: PRIORITY.High,
                 },
                 {
-                  label: Priority.Medium,
-                  value: Priority.Medium,
+                  label: PRIORITY.Medium,
+                  value: PRIORITY.Medium,
                 },
                 {
-                  label: Priority.Low,
-                  value: Priority.Low,
+                  label: PRIORITY.Low,
+                  value: PRIORITY.Low,
                 },
                 {
-                  label: Priority.Backlog,
-                  value: Priority.Backlog,
+                  label: PRIORITY.Backlog,
+                  value: PRIORITY.Backlog,
                 },
               ]}
             />

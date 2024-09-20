@@ -1,4 +1,4 @@
-import { Image } from "antd";
+// import { Image } from "antd";
 import { format } from "date-fns";
 
 type Props = {
@@ -13,15 +13,16 @@ const TaskCard = ({ task }: Props) => {
           <strong>Attachments:</strong>
           <div className="flex flex-wrap">
             {task.attachments && task.attachments.length > 0 && (
-              <Image
-                // src={`https://pm-s3-images.s3.us-east-2.amazonaws.com/${task.attachments[0].fileURL}`}
-                src="https://assets.ggwp.id/2024/07/Logo-ff-keren-7.jpg"
-                alt={task.attachments[0].fileName}
-                width={400}
-                height={200}
-                preview={false}
-                className="rounded-md"
-              />
+              // <Image
+              //   // src={`https://pm-s3-images.s3.us-east-2.amazonaws.com/${task.attachments[0].fileURL}`}
+              //   // src="https://assets.ggwp.id/2024/07/Logo-ff-keren-7.jpg"
+              //   alt={task.attachments[0].fileName}
+              //   width={400}
+              //   height={200}
+              //   preview={false}
+              //   className="rounded-md"
+              // />
+              <></>
             )}
           </div>
         </div>

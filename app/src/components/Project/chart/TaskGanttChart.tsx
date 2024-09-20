@@ -1,25 +1,30 @@
 import { useAppSelector } from "@/store";
-import { DisplayOption, Gantt, Task, ViewMode } from "gantt-task-react";
+import { DisplayOption, Gantt, ViewMode } from "gantt-task-react";
 import "gantt-task-react/dist/index.css";
 import { useMemo } from "react";
 
-interface GanttChartProps {
-  data: Project[];
+interface TaskGanttChartProps {
+  data: Task[];
   displayOptions: DisplayOption;
 }
 
-export default function GanttChart({ data, displayOptions }: GanttChartProps) {
+type TaskTypeItems = "task" | "milestone" | "project";
+
+export default function TaskGanttChart({
+  data,
+  displayOptions,
+}: TaskGanttChartProps) {
   const isDarkMode = useAppSelector((state) => state.global.isDarkMode);
 
-  const ganttTasks = useMemo((): Task[] => {
+  const ganttTasks = useMemo(() => {
     return (
-      data?.map((project) => ({
-        start: new Date((project.startDate as string) || new Date()),
-        end: new Date((project.endDate as string) || new Date()),
-        name: project.name,
-        id: `Project-${project.id}`,
-        type: "project",
-        progress: 50,
+      data?.map((task) => ({
+        start: new Date(task.startDate as string),
+        end: new Date(task.dueDate as string),
+        name: task.title,
+        id: `Task-${task.id}`,
+        type: "task" as TaskTypeItems,
+        progress: task.points ? (task.points / 10) * 100 : 0,
         isDisabled: false,
       })) || []
     );

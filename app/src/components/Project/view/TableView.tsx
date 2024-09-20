@@ -1,13 +1,21 @@
 import { TASK_STATUS } from "@/constants";
-import { Table, TableProps, Tag, Typography } from "antd";
+import {
+  Empty,
+  Skeleton,
+  Space,
+  Table,
+  TableProps,
+  Tag,
+  Typography,
+} from "antd";
 import { format } from "date-fns";
 
-const priorityColumn: TableProps["columns"] = [
+const taskColumns: TableProps["columns"] = [
   {
     title: "Title",
     dataIndex: "title",
     key: "title",
-    width: 150,
+    width: 200,
   },
   {
     title: "Description",
@@ -19,7 +27,7 @@ const priorityColumn: TableProps["columns"] = [
     title: "Status",
     dataIndex: "status",
     key: "status",
-    width: 150,
+    width: 200,
     render: (status: string) => {
       if (status === TASK_STATUS.ToDo) {
         return <Tag color="processing">{status}</Tag>;
@@ -36,7 +44,16 @@ const priorityColumn: TableProps["columns"] = [
     title: "Priority",
     dataIndex: "priority",
     key: "priority",
-    width: 130,
+    width: 200,
+    render: (priority: string) => {
+      if (priority === "Urgent") {
+        return <Typography.Text type="danger">{priority}</Typography.Text>;
+      } else if (priority === "High") {
+        return <Typography.Text type="warning">{priority}</Typography.Text>;
+      } else {
+        return <Typography.Text type="success">{priority}</Typography.Text>;
+      }
+    },
   },
   {
     title: "Tags",
@@ -76,7 +93,7 @@ const priorityColumn: TableProps["columns"] = [
     title: "Start Date",
     dataIndex: "startDate",
     key: "startDate",
-    width: 130,
+    width: 200,
     render: (startDate: string) => {
       return (
         <Typography.Text>
@@ -109,44 +126,53 @@ const priorityColumn: TableProps["columns"] = [
   },
   {
     title: "Author",
-    dataIndex: "author",
-    key: "author",
-    width: 150,
-    render: (author: User) => author.username,
+    dataIndex: "Author",
+    key: "Author",
+    width: 200,
+    render: (author: string) => author || "Unknown",
   },
   {
     title: "Assignee",
-    dataIndex: "assignee",
+    dataIndex: "Assignee",
+    key: "Assignee",
+    width: 200,
+    render: (assignee: string) => assignee || "Unassigned",
+  },
+  {
+    title: "Action",
+    key: "Action",
     width: 150,
-    render: (assignee: User) => assignee.username,
+    render: () => (
+      <Space>
+        <a>Delete</a>
+        <a>Edit</a>
+      </Space>
+    ),
   },
 ];
 
-interface PriorityTableProps {
-  data: Task[];
-  loading: boolean;
-  priority: string;
+interface TaskTableProps {
+  data: Task[] | null | undefined;
+  isLoading: boolean;
 }
 
-export default function PriorityTable({
-  data,
-  loading,
-  priority,
-}: PriorityTableProps) {
-  const filteredTasks = data.filter(
-    (task: Task) => task.priority?.toLowerCase() === priority,
-  );
-
+export default function TableView({ data, isLoading }: TaskTableProps) {
   return (
-    <div className="w-full">
-      <Table
-        scroll={{ x: 600, y: 300 }}
-        loading={loading}
-        columns={priorityColumn}
-        dataSource={filteredTasks}
-        rowKey={(task) => task.id}
-        virtual
-      />
+    <div className="px-4 pb-8 xl:px-6">
+      {isLoading ? (
+        <Skeleton active loading={isLoading} />
+      ) : !data ? (
+        <Empty rootClassName="flex justify-center items-center flex-col" />
+      ) : (
+        <Table
+          scroll={{ x: 100, y: 300 }}
+          loading={isLoading}
+          columns={taskColumns}
+          dataSource={data}
+          rowKey={(task) => task.id}
+          virtual
+        />
+      )}
     </div>
   );
 }

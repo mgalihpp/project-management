@@ -55,7 +55,14 @@ class TaskValidator {
   }
 
   updateTask(req: Request, res: Response, next: NextFunction) {
-    const result1 = z.object({ taskId: z.number() }).safeParse(req.params);
+    const result1 = z
+      .object({
+        taskId: z.union([
+          z.string().min(1, 'TaskId is required'),
+          z.number().min(1, 'TaskId is required'),
+        ]),
+      })
+      .safeParse(req.params);
     const result2 = z
       .object({ status: taskSchema.shape.status })
       .safeParse(req.body);

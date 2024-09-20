@@ -8,6 +8,7 @@ import SettingsPage from "./Settings";
 import UsersPage from "./Users";
 import TeamsPage from "./Teams";
 import PriorityPage from "./Priority";
+import ProjectPage from "./project/Project";
 
 export const routes: RouteObject[] = [
   {
@@ -37,6 +38,10 @@ export const routes: RouteObject[] = [
       {
         path: "priority/:priority",
         element: <PriorityPage />,
+      },
+      {
+        path: "project/:id",
+        element: <ProjectPage />,
       },
     ],
   },

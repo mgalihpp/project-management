@@ -43,7 +43,7 @@ export default function ReasuablePriority({ priority }: Priority) {
       {isLoading ? (
         <Skeleton active loading={isLoading} />
       ) : !tasksData?.data ? (
-        <Empty rootClassName="flex justify-center items-center" />
+        <Empty rootClassName="flex justify-center items-center flex-col" />
       ) : view === "List" ? (
         <PriorityList data={tasksData.data} priority={priority} />
       ) : (

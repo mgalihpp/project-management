@@ -1,19 +1,15 @@
 import ReasuablePriority from "@/components/Priority/ReusablePriority";
+import { PRIORITY } from "@/constants";
 import { useParams } from "react-router-dom";
 
 export default function PriorityPage() {
   const { priority } = useParams();
 
-  const Priority = {
-    urgent: "urgent",
-    high: "high",
-    medium: "medium",
-    low: "low",
-    backlog: "backlog",
-  };
-
-  if (!Object.values(Priority).includes(priority as Priority)) {
-    throw new Error(`Invalid priority: ${priority}`);
+  const lowerCasePriorities = Object.values(PRIORITY).map(
+    (priorityValue) => priorityValue.toLowerCase() as Priority,
+  );
+  if (!lowerCasePriorities.includes(priority as Priority)) {
+    return <div>Invalid priority: {priority}</div>;
   }
 
   return <ReasuablePriority priority={priority!} />;
