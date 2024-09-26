@@ -109,17 +109,17 @@ const taskColumns: TableProps["columns"] = [
   },
   {
     title: "Author",
-    dataIndex: "Author",
+    dataIndex: "author",
     key: "Author",
     width: 200,
-    render: (author: string) => author || "Unknown",
+    render: (author: User) => author.username || "Unknown",
   },
   {
     title: "Assignee",
-    dataIndex: "Assignee",
+    dataIndex: "assignee",
     key: "Assignee",
     width: 200,
-    render: (assignee: string) => assignee || "Unassigned",
+    render: (assignee: User) => assignee.username || "Unassigned",
   },
   {
     title: "Action",
@@ -141,7 +141,7 @@ interface TaskTableProps {
 
 export default function TableView({ data, isLoading }: TaskTableProps) {
   return (
-    <div className="px-4 pb-8 xl:px-6">
+    <div className="p-4 xl:px-6">
       {isLoading ? (
         <Skeleton active loading={isLoading} />
       ) : !data ? (

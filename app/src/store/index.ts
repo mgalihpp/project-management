@@ -27,6 +27,8 @@ export interface initialStateTypes {
     user: User | null;
     token: string | null;
   };
+  taskModalOpen: boolean;
+  projectModalOpen: boolean;
 }
 
 const initialState: initialStateTypes = {
@@ -36,6 +38,8 @@ const initialState: initialStateTypes = {
     user: null,
     token: null,
   },
+  taskModalOpen: false,
+  projectModalOpen: false,
 };
 
 // REDUX SLICE
@@ -51,12 +55,18 @@ export const globalSlice = createSlice({
     },
     setSession: (
       state,
-      action: PayloadAction<{ user: User; token: string }>,
+      action: PayloadAction<{ user: User | null; token: string | null }>,
     ) => {
       state.session = {
         user: action.payload.user,
         token: action.payload.token,
       };
+    },
+    setTaskModalOpen: (state, action: PayloadAction<boolean>) => {
+      state.taskModalOpen = action.payload;
+    },
+    setProjectModalOpen: (state, action: PayloadAction<boolean>) => {
+      state.projectModalOpen = action.payload;
     },
   },
 });
@@ -144,5 +154,10 @@ export type AppDispatch = typeof store.dispatch;
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
-export const { setIsSidebarCollapsed, setIsDarkMode, setSession } =
-  globalSlice.actions;
+export const {
+  setIsSidebarCollapsed,
+  setIsDarkMode,
+  setSession,
+  setTaskModalOpen,
+  setProjectModalOpen,
+} = globalSlice.actions;

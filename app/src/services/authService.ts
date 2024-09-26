@@ -17,7 +17,7 @@ export const fetchAuthSession = async (): Promise<void | null> => {
 
       const session = {
         user: response.data.data,
-        token: store.getState().global.session.token ?? "",
+        token: Cookies.get("token") ?? "",
       };
 
       store.dispatch(setSession(session));
@@ -26,4 +26,13 @@ export const fetchAuthSession = async (): Promise<void | null> => {
       console.error(error);
       return null;
     });
+};
+
+export const handleSignOut = () => {
+  store.dispatch(
+    setSession({
+      user: null,
+      token: null,
+    }),
+  );
 };

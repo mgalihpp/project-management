@@ -10,13 +10,13 @@ import {
   Modal,
   Select,
 } from "antd";
-import React, { useState } from "react";
+import { useState } from "react";
 import dayjs from "dayjs";
 import { PRIORITY, TASK_STATUS } from "@/constants";
 
 interface AddTaskModalProps {
   open: boolean;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setOpen: (open: boolean) => void;
 }
 
 type tagOptions = {

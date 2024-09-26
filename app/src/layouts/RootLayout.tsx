@@ -4,9 +4,9 @@ import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { setIsSidebarCollapsed } from "@/store";
 import { Drawer, Layout, theme } from "antd";
-import React from "react";
+import React, { useEffect } from "react";
 
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 
 const { Sider, Header, Content } = Layout;
 const { useToken } = theme;
@@ -27,6 +27,7 @@ export default function RootLayout() {
     (state) => state.global.isSidebarCollapsed,
   );
   const isDarkMode = useAppSelector((state) => state.global.isDarkMode);
+  const session = useAppSelector((state) => state.global.session);
   const dispatch = useAppDispatch();
 
   const isMobile = useMediaQuery("(max-width: 768px)");
@@ -36,6 +37,17 @@ export default function RootLayout() {
   const onClose = () => {
     dispatch(setIsSidebarCollapsed(true));
   };
+
+  const navigate = useNavigate();
+
+  // Redirect to login if user is not authenticated
+  useEffect(() => {
+    if (!session.user || !session.token) {
+      navigate("/signin");
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [session.user, session.token]);
 
   return (
     <Layout className="min-h-screen bg-white dark:bg-dark-bg">

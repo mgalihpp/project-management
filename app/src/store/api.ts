@@ -19,35 +19,6 @@ export const api = createApi({
   reducerPath: "api",
   tagTypes: ["Projects", "Tasks", "Users", "Teams"],
   endpoints: (build) => ({
-    // getAuthUser: build.query({
-    //   queryFn: async (_, _queryApi, _extraoptions, fetchWithBQ) => {
-    //     try {
-    //       //   const user = await getCurrentUser();
-    //       //   const session = await fetchAuthSession();
-    //       const user = {};
-    //       const session = {
-    //         userSub: "some user sub",
-    //         tokens: {
-    //           accessToken: "some token",
-    //         },
-    //       };
-    //       if (!session) throw new Error("No session found");
-    //       const { userSub } = session;
-    //       const { accessToken } = session.tokens ?? {};
-
-    //       const userDetailsResponse = await fetchWithBQ(`users/${userSub}`);
-    //       const userDetails = userDetailsResponse.data as User;
-
-    //       return { data: { user, userSub, userDetails } };
-    //     } catch (error) {
-    //       if (error instanceof Error) {
-    //         return {
-    //           error: error.message || "Could not fetch user data",
-    //         };
-    //       }
-    //     }
-    //   },
-    // }),
     login: build.mutation<
       ApiResponse<string>,
       { username: string; password: string }

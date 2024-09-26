@@ -29,10 +29,10 @@ export default function SignupPage() {
   const session = useAppSelector((state) => state.global.session);
 
   useEffect(() => {
-    if (session.user) {
+    if (session.user && session.token) {
       navigate("/");
     }
-  }, [session.user, navigate]);
+  }, [session.user, session.token, navigate]);
 
   const showMessage = ({
     type = "info",
@@ -62,6 +62,7 @@ export default function SignupPage() {
             content: "Successfully signed up",
             duration: 2.5,
           });
+          navigate("/signin");
         } else {
           messageApi.destroy();
           showMessage({

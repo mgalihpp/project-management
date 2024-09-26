@@ -1,4 +1,4 @@
-import { useAppSelector } from "@/store";
+import { setTaskModalOpen, useAppDispatch, useAppSelector } from "@/store";
 import { api } from "@/store/api";
 import { useState } from "react";
 import Header from "../Header";
@@ -13,9 +13,15 @@ interface Priority {
 
 export default function ReasuablePriority({ priority }: Priority) {
   const [view, setView] = useState("List");
-  const [isModalNewTaskOpen, setIsModalNewTaskOpen] = useState(false);
 
   const session = useAppSelector((state) => state.global.session);
+  const isTaskModalOpen = useAppSelector((state) => state.global.taskModalOpen);
+
+  const dispatch = useAppDispatch();
+
+  const toggleModal = (value: boolean) => {
+    dispatch(setTaskModalOpen(value));
+  };
 
   const { data: tasksData, isLoading } = api.useGetTasksByUserQuery(1, {
     skip: !session.user,
@@ -23,11 +29,11 @@ export default function ReasuablePriority({ priority }: Priority) {
 
   return (
     <div className="mb-5 p-4">
-      <AddTaskModal open={isModalNewTaskOpen} setOpen={setIsModalNewTaskOpen} />
+      <AddTaskModal open={isTaskModalOpen} setOpen={toggleModal} />
       <Header
         name={`${priority.charAt(0).toUpperCase()}${priority.slice(1)} Priority`}
         buttonComponent={
-          <Button onClick={() => setIsModalNewTaskOpen(true)}>Add Task</Button>
+          <Button onClick={() => toggleModal(true)}>Add Task</Button>
         }
       />
       <div className="mb-4 flex justify-start">

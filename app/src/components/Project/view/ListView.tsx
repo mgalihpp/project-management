@@ -1,8 +1,8 @@
 import TaskCard from "@/components/Card/TaskCard";
 import Header from "@/components/Header";
 import AddTaskModal from "@/components/Modal/AddTask";
+import { useAppSelector, useAppDispatch, setTaskModalOpen } from "@/store";
 import { Button, Empty, Skeleton } from "antd";
-import { useState } from "react";
 
 interface ListViewProps {
   data: Task[] | null | undefined;
@@ -10,21 +10,22 @@ interface ListViewProps {
 }
 
 export default function ListView({ data, isLoading }: ListViewProps) {
-  const [isModalNewTaskOpen, setIsModalNewTaskOpen] = useState(false);
+  const isTaskModalOpen = useAppSelector((state) => state.global.taskModalOpen);
+
+  const dispatch = useAppDispatch();
+
+  const toggleModal = (value: boolean) => {
+    dispatch(setTaskModalOpen(value));
+  };
 
   return (
-    <div className="px-4 pb-8 xl:px-6">
+    <div className="p-4 xl:px-6">
       <div className="pt-5">
-        <AddTaskModal
-          open={isModalNewTaskOpen}
-          setOpen={setIsModalNewTaskOpen}
-        />
+        <AddTaskModal open={isTaskModalOpen} setOpen={toggleModal} />
         <Header
           name="List"
           buttonComponent={
-            <Button onClick={() => setIsModalNewTaskOpen(true)}>
-              Add Task
-            </Button>
+            <Button onClick={() => toggleModal(true)}>Add Task</Button>
           }
           isSmallText
         />

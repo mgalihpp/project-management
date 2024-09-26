@@ -30,10 +30,10 @@ export default function SigninPage() {
   const session = useAppSelector((state) => state.global.session);
 
   useEffect(() => {
-    if (session.user) {
+    if (session.user && session.token) {
       navigate("/");
     }
-  }, [session.user, navigate]);
+  }, [session.user, session.token, navigate]);
 
   const showMessage = ({
     type = "info",

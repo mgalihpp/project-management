@@ -37,7 +37,7 @@ export default function TimelineView({ data, isLoading }: TimelineViewProps) {
   ];
 
   return (
-    <div className="px-4 xl:px-6">
+    <div className="p-4 xl:px-6">
       <header className="flex flex-wrap items-center justify-between gap-2 py-5">
         <h1 className="me-2 text-lg font-bold dark:text-white">
           Project Tasks Timeline

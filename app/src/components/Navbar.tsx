@@ -1,4 +1,5 @@
 // @ts-nocheck
+import { handleSignOut } from "@/services/authService";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { setIsDarkMode, setIsSidebarCollapsed } from "@/store";
 import { api } from "@/store/api";
@@ -241,7 +242,6 @@ export default function Navbar() {
               size="small"
               href="/signin"
               className="hidden rounded px-2 pt-0.5 text-xs font-bold md:block"
-              // onClick={handleSignOut}
             >
               Sign in
             </Button>
@@ -250,7 +250,7 @@ export default function Navbar() {
               type="primary"
               size="small"
               className="hidden rounded px-2 text-xs font-bold md:block"
-              // onClick={handleSignOut}
+              onClick={handleSignOut}
             >
               Sign out
             </Button>

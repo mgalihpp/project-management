@@ -4,7 +4,7 @@ import dayjs from "dayjs";
 
 interface AddProjectModalProps {
   open: boolean;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setOpen: (open: boolean) => void;
 }
 
 interface ProjectForm {
@@ -61,7 +61,7 @@ export default function AddProjectModal({
           messageApi.destroy();
           showMessage({
             type: "success",
-            content: "Task created successfully",
+            content: "Project created successfully",
             duration: 2.5,
           });
           form.resetFields();
@@ -118,7 +118,7 @@ export default function AddProjectModal({
           ],
           [
             <Button
-              form="add_task"
+              form="add_project"
               type="primary"
               key="submit"
               htmlType="submit"
@@ -130,8 +130,8 @@ export default function AddProjectModal({
         ]}
       >
         <Form
-          //   form={form}
-          name="add_task"
+          form={form}
+          name="add_project"
           layout="vertical"
           requiredMark="optional"
           onFinish={handleSubmit}
