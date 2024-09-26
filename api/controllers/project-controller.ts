@@ -24,6 +24,7 @@ class ProjectController {
 
       await db.project.create({
         data: {
+          id: Math.floor(Math.random() * 100000),
           name,
           description,
           startDate,

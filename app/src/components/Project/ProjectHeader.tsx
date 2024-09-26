@@ -8,7 +8,8 @@ import {
   TableOutlined,
 } from "@ant-design/icons";
 import { Filter, Grid3x3, Share2 } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
+import AddProjectModal from "../Modal/AddProject";
 
 type viewType = "List" | "Table" | "Timeline" | "Board" | string;
 interface ProjectHeaderProps {
@@ -16,17 +17,23 @@ interface ProjectHeaderProps {
 }
 
 export default function ProjectHeader({ setView }: ProjectHeaderProps) {
+  const [isModalNewTaskOpen, setIsModalNewTaskOpen] = useState(false);
+
   return (
     <div className="px-4 xl:px-6">
+      <AddProjectModal
+        open={isModalNewTaskOpen}
+        setOpen={setIsModalNewTaskOpen}
+      />
       <div className="pb-6 pt-6 lg:pb-4 lg:pt-8">
         <Header
           name="Project Design Development"
           buttonComponent={
             <Button
-              onClick={() => console.log("Hello")}
+              onClick={() => setIsModalNewTaskOpen(true)}
               icon={<PlusCircleFilled />}
             >
-              Add Boards
+              Add Project
             </Button>
           }
         />
@@ -65,7 +72,7 @@ export default function ProjectHeader({ setView }: ProjectHeaderProps) {
             setView(value);
           }}
         />
-        <div className="flex max-sm:w-full items-center gap-2">
+        <div className="flex items-center gap-2 max-sm:w-full">
           <Button>
             <Filter className="size-5" />
           </Button>

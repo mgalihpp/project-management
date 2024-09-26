@@ -96,9 +96,9 @@ export const api = createApi({
       query: () => "project",
       providesTags: ["Projects"],
     }),
-    createProject: build.mutation<Project, Partial<Project>>({
+    createProject: build.mutation<ApiResponse<Project>, Partial<Project>>({
       query: (project) => ({
-        url: "projects",
+        url: "project",
         method: "POST",
         body: project,
       }),

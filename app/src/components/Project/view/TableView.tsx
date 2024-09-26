@@ -62,19 +62,6 @@ const taskColumns: TableProps["columns"] = [
     width: 200,
     render: (tags: string) => {
       let tagList: string[] = [];
-      const colors = [
-        "red",
-        "volcano",
-        "orange",
-        "gold",
-        "lime",
-        "green",
-        "cyan",
-        "blue",
-        "geekblue",
-        "purple",
-        "magenta",
-      ];
 
       if (tags.includes(",")) {
         tagList = tags.split(",").map((tag) => tag.trim());
@@ -82,11 +69,7 @@ const taskColumns: TableProps["columns"] = [
         tagList = [tags];
       }
 
-      return tagList.map((tag, index) => (
-        <Tag color={colors[index % colors.length]} key={index}>
-          {tag}
-        </Tag>
-      ));
+      return tagList.map((tag, index) => <Tag key={index}>{tag}</Tag>);
     },
   },
   {

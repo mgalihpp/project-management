@@ -56,7 +56,7 @@ export default function TimelineView({ data, isLoading }: TimelineViewProps) {
 
       {isLoading ? (
         <Skeleton active loading={isLoading} />
-      ) : !data ? (
+      ) : data?.length === 0 || !data ? (
         <Empty rootClassName="flex justify-center items-center flex-col mx-auto" />
       ) : (
         <TaskGanttChart data={data} displayOptions={displayOptions} />

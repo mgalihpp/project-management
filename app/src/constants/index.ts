@@ -13,4 +13,18 @@ const PRIORITY = {
   Backlog: "Backlog",
 };
 
-export { TASK_STATUS, PRIORITY };
+const TAGS_COLOR = [
+  "red",
+  "volcano",
+  "orange",
+  "gold",
+  "lime",
+  "green",
+  "cyan",
+  "blue",
+  "geekblue",
+  "purple",
+  "magenta",
+];
+
+export { TASK_STATUS, PRIORITY, TAGS_COLOR };

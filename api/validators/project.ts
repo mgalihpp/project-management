@@ -1,13 +1,14 @@
 import type { Request, Response, NextFunction } from 'express';
 import z from 'zod';
 import httpError from '../helpers/httpError';
+import { ISO_DATE_REGEX } from '../helpers/isodate';
 
 // Define a Zod schema
 export const projectSchema = z.object({
   name: z.string().min(1, 'Username is required'),
   description: z.string().min(1, 'Cognito Id is required'),
-  startDate: z.string().date('Must be a valid date'),
-  endDate: z.string().date('Must be a valid date'),
+  startDate: z.string().regex(ISO_DATE_REGEX, 'date must be a valid ISO date'),
+  endDate: z.string().regex(ISO_DATE_REGEX, 'date must be a valid ISO date'),
 });
 
 // Middleware to validate request with Zod

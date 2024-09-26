@@ -1,9 +1,10 @@
-import TaskCard from "@/components/Card/TaskCard";
+import AddTaskModal from "@/components/Modal/AddTask";
+import TaskCard from "@/components/Project/card/TaskCard";
 import { TASK_STATUS } from "@/constants";
 import { api } from "@/store/api";
 import { Empty, Flex, Skeleton } from "antd";
 import { EllipsisVertical, Plus } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { DndProvider, useDrag, useDrop } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
@@ -65,6 +66,7 @@ export default function BoardView({ data, isLoading }: BoardViewProps) {
 }
 
 const TaskColumn = ({ status, tasks, moveTask }: TaskColumnProps) => {
+  const [isModalNewTaskOpen, setIsModalNewTaskOpen] = useState(false);
   const [{ isOver }, drop] = useDrop({
     accept: "task",
     drop: (item: { id: number }) => moveTask(item.id, status),
@@ -89,6 +91,7 @@ const TaskColumn = ({ status, tasks, moveTask }: TaskColumnProps) => {
       }}
       className={`rounded-lg py-2 xl:px-2 ${isOver ? "bg-blue-100 dark:bg-neutral-950" : ""}`}
     >
+      <AddTaskModal open={isModalNewTaskOpen} setOpen={setIsModalNewTaskOpen} />
       <Flex className="mb-3 w-full">
         <div
           className={`w-2 !bg-[${statusColor[status]}] rounded-s-lg`}
@@ -110,7 +113,7 @@ const TaskColumn = ({ status, tasks, moveTask }: TaskColumnProps) => {
             </button>
             <button
               className="flex h-6 w-6 items-center justify-center rounded bg-gray-200 dark:bg-dark-tertiary dark:text-white"
-              //   onClick={() => setIsModalNewTaskOpen(true)}
+              onClick={() => setIsModalNewTaskOpen(true)}
             >
               <Plus size={16} />
             </button>
