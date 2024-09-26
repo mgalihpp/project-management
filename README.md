@@ -1,6 +1,6 @@
 
 # Project/Task Management
-A simple and efficient project/task management application designed to help users organize and track tasks. Features include task prioritization, deadlines, progress tracking, and team collaboration, offering a streamlined interface for managing workflows.
+A simple and efficient project/task management application designed to help users organize and track tasks. Features include task prioritization, deadlines, and progress tracking.
 
 
 ## Environment Variables
